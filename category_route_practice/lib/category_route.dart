@@ -7,15 +7,6 @@ import 'package:category_route_practice/category.dart';
 
 final _backgroundColor = Colors.green[100];
 
-// TODO: Define any constants
-
-/// Category Route (screen).
-///
-/// This is the 'home' screen of the Unit Converter. It shows a header and
-/// a list of [Categories].
-///
-/// While it is named CategoryRoute, a more apt name would be CategoryScreen,
-/// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
   const CategoryRoute();
 
