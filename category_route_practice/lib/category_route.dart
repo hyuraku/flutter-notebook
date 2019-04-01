@@ -4,18 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:category_route_practice/category.dart';
+import 'package:category_route_practice/unit.dart';
 
 final _backgroundColor = Colors.green[100];
 
-// TODO: Define any constants
-
-/// Category Route (screen).
-///
-/// This is the 'home' screen of the Unit Converter. It shows a header and
-/// a list of [Categories].
-///
-/// While it is named CategoryRoute, a more apt name would be CategoryScreen,
-/// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
   const CategoryRoute();
 
@@ -48,6 +40,16 @@ class CategoryRoute extends StatelessWidget {
     );
   }
 
+  List<Unit>_retrieveUnitList(String categoryName){
+    return List.generate(10, (int i){
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final categories = <Category>[];
@@ -57,6 +59,7 @@ class CategoryRoute extends StatelessWidget {
         name: _categoryNames[i],
         color: _baseColors[i],
         iconLocation: Icons.cake,
+        units: _retrieveUnitList(_categoryNames[i]),
       ));
     }
 
