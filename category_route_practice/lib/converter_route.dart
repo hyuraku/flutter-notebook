@@ -13,15 +13,13 @@ import 'package:category_route_practice/unit.dart';
 ///
 /// While it is named ConverterRoute, a more apt name would be ConverterScreen,
 /// because it is responsible for the UI at the route's destination.
-class ConverterRoute extends StatelessWidget {
-  /// Units for this [Category].
-  final List<Unit> units;
 
+class ConverterRoute extends StatefulWidget{
+  final List<Unit> units;
   final String name;
   final Color color;
 
   /// This [ConverterRoute] requires the name, color, and units to not be null.
-  // TODO: Pass in the [Category]'s name and color
   const ConverterRoute({
     @required this.name,
     @required this.color,
@@ -31,11 +29,28 @@ class ConverterRoute extends StatelessWidget {
         assert(units != null);
 
   @override
+  _ConverterRoute createState() => _ConverterRoute();
+}
+class _ConverterRoute extends State<ConverterRoute> {
+//  final List<Unit> units;
+//  final String name;
+//  final Color color;
+
+  /// This [ConverterRoute] requires the name, color, and units to not be null
+//  const ConverterRoute({
+//    @required this.name,
+//    @required this.color,
+//    @required this.units,
+//  })  : assert(name != null),
+//        assert(color != null),
+//        assert(units != null);
+
+  @override
   Widget build(BuildContext context) {
     // Here is just a placeholder for a list of mock units
-    final unitWidgets = units.map((Unit unit) {
+    final unitWidgets = widget.units.map((Unit unit) {
       return Container(
-        color: color,
+        color: widget.color,
         margin: EdgeInsets.all(8.0),
         padding: EdgeInsets.all(16.0),
         child: Column(
