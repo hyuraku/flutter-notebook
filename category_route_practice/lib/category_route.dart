@@ -8,8 +8,16 @@ import 'package:category_route_practice/unit.dart';
 
 final _backgroundColor = Colors.green[100];
 
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget{
   const CategoryRoute();
+
+  @override
+  _CategoryRouteState createState() =>_CategoryRouteState();
+}
+
+
+class _CategoryRouteState extends State<CategoryRoute> {
+  final _categories = <Category>[];
 
   static const _categoryNames = <String>[
     'Length',
@@ -33,10 +41,22 @@ class CategoryRoute extends StatelessWidget {
     Colors.red,
   ];
 
+  @override
+  void initState(){
+    super.initState();
+    for(var i = 0; i < _categoryNames.length; i++){
+      _categories.add(Category(
+      name: _categoryNames[i],
+    color: _baseColors[i],
+    iconLocation: Icons.cake,
+    units: _retrieveUnitList(_categoryNames[i])));
+    }
+  }
+
   Widget _buildCategoryWidgets(List<Widget> categories) {
     return ListView.builder(
-      itemBuilder: (BuildContext context, int index) => categories[index],
-      itemCount: categories.length,
+      itemBuilder: (BuildContext context, int index) => _categories[index],
+      itemCount: _categories.length,
     );
   }
 
