@@ -7,12 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:category_route_practice/unit.dart';
 
-/// Converter screen where users can input amounts to convert.
-///
-/// Currently, it just displays a list of mock units.
-///
-/// While it is named ConverterRoute, a more apt name would be ConverterScreen,
-/// because it is responsible for the UI at the route's destination.
+const _padding = EdgeInsets.all(16.0);
 
 class ConverterRoute extends StatefulWidget{
   final List<Unit> units;
@@ -32,18 +27,45 @@ class ConverterRoute extends StatefulWidget{
   _ConverterRoute createState() => _ConverterRoute();
 }
 class _ConverterRoute extends State<ConverterRoute> {
-//  final List<Unit> units;
-//  final String name;
-//  final Color color;
+  Unit _formValue;
+  Unit _toValue;
+  double _inputValue;
+  String _convertValue = '';
+  List<DropdownMenuItem> _unitMenuItems;
+  bool _showValidationError = false;
 
-  /// This [ConverterRoute] requires the name, color, and units to not be null
-//  const ConverterRoute({
-//    @required this.name,
-//    @required this.color,
-//    @required this.units,
-//  })  : assert(name != null),
-//        assert(color != null),
-//        assert(units != null);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void _createDropdownMenuItems(){
+    var newItems = <DropdownMenuItem>[];
+    for (var unit in widget.units){
+      newItems.add(DropdownMenuItem(
+          value: unit.name,
+          child: Container(
+            child: Text(
+              unit.name,
+              softWrap: true,
+            ),
+          )
+      ));
+    }
+    setState(() {
+      _unitMenuItems = newItems;
+    });
+  }
+
+  void _setDefaults(){
+    setState((){
+      _formValue = widget.units[0];
+      _toValue = widget.units[1];
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
