@@ -30,14 +30,15 @@ class _ConverterRoute extends State<ConverterRoute> {
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
-  String _convertValue = '';
+  String _convertedValue = '';
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _createDropdownMenuItems();
+    _setDefaults();
   }
 
   void _createDropdownMenuItems(){
@@ -60,19 +61,19 @@ class _ConverterRoute extends State<ConverterRoute> {
 
   void _setDefaults(){
     setState((){
-      _formValue = widget.units[0];
+      _fromValue = widget.units[0];
       _toValue = widget.units[1];
     });
   }
 
   String _format(double conversion){
     var outputNum = conversion.toStringAsPrecision(7);
-    if(outputNum.contains('.') && outputNum.endsWith(0)){
+    if(outputNum.contains('.') && outputNum.endsWith('0')){
       var i = outputNum.length -1 ;
       while(outputNum[i] == '0'){
         i -= 1;
       }
-      outputNum = outputNum.substring(0, i + 1)
+      outputNum = outputNum.substring(0, i + 1);
     }
     if(outputNum.endsWith('.')){
       return outputNum.substring(0, outputNum.length -1);
@@ -82,15 +83,15 @@ class _ConverterRoute extends State<ConverterRoute> {
 
   void _updateConversion(){
     setState(() {
-      _convertValue =
+      _convertedValue =
           _format(_inputValue *(_toValue.conversion / _fromValue.conversion));
     });
   }
 
-  void _updateInoutValues(String input){
+  void _updateInputValue(String input){
     setState(() {
       if(input == null || input.isEmpty){
-        _convertValue = '';
+        _convertedValue = '';
       }else{
         try{
           final inputDouble = double.parse(input);
@@ -164,29 +165,77 @@ class _ConverterRoute extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // Here is just a placeholder for a list of mock units
-    final unitWidgets = widget.units.map((Unit unit) {
-      return Container(
-        color: widget.color,
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              unit.name,
-              style: Theme.of(context).textTheme.headline,
+    final input = Padding(
+      padding: _padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // This is the widget that accepts text input. In this case, it
+          // accepts numbers and calls the onChanged property on update.
+          // You can read more about it here: https://flutter.io/text-input
+          TextField(
+            style: Theme.of(context).textTheme.display1,
+            decoration: InputDecoration(
+              labelStyle: Theme.of(context).textTheme.display1,
+              errorText: _showValidationError ? 'Invalid number entered' : null,
+              labelText: 'Input',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(0.0),
+              ),
             ),
-            Text(
-              'Conversion: ${unit.conversion}',
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ],
-        ),
-      );
-    }).toList();
+            // Since we only want numerical input, we use a number keyboard. There
+            // are also other keyboards for dates, emails, phone numbers, etc.
+            keyboardType: TextInputType.number,
+            onChanged: _updateInputValue,
+          ),
+          _createDropdown(_fromValue.name, _updateFromConversion),
+        ],
+      ),
+    );
 
-    return ListView(
-      children: unitWidgets,
+    final arrows = RotatedBox(
+      quarterTurns: 1,
+      child: Icon(
+        Icons.compare_arrows,
+        size: 40.0,
+      ),
+    );
+
+    final output = Padding(
+      padding: _padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          InputDecorator(
+            child: Text(
+              _convertedValue,
+              style: Theme.of(context).textTheme.display1,
+            ),
+            decoration: InputDecoration(
+              labelText: 'Output',
+              labelStyle: Theme.of(context).textTheme.display1,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(0.0),
+              ),
+            ),
+          ),
+          _createDropdown(_toValue.name, _updateToConversion),
+        ],
+      ),
+    );
+
+    final converter = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        input,
+        arrows,
+        output,
+      ],
+    );
+
+    return Padding(
+      padding: _padding,
+      child: converter,
     );
   }
 }
