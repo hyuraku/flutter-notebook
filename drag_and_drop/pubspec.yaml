@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
-  audioplayer: 0.11.0
+  audioplayers: 0.11.0
 
 dev_dependencies:
   flutter_test:
@@ -43,7 +43,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-   assets:
+  assets:
     - 'success.mp3'
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -57,10 +57,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-   fonts:
-     - family: PressStart
-       fonts:
-         - asset: assets/PressStart2P.ttf
+  fonts:
+    - family: PressStart
+      fonts:
+        - asset: assets/PressStart2P.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
