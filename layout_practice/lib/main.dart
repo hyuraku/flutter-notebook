@@ -39,6 +39,18 @@ class myApp extends StatelessWidget{
         ],
       ),
     );
+
+    Color color = Theme.of(context).primaryColor;
+    Widget buttonSection = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildButtonColumn(color, Icons.call,'CALL'),
+          _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+          _buildButtonColumn(color, Icons.share, 'SHARE')
+        ],
+      ),
+    );
     // TODO: implement build
     return MaterialApp(
       title: "Flutter Layout memo",
@@ -49,9 +61,32 @@ class myApp extends StatelessWidget{
         body: Column(
           children: [
             titleSection,
+            buttonSection,
           ],
         ),
       ),
+    );
+  }
+
+
+  Column _buildButtonColumn(Color color, IconData icon, String label){
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
