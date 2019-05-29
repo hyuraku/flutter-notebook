@@ -9,16 +9,17 @@ class myApp extends StatelessWidget {
       return Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+            Container(
+              padding: const EdgeInsets.only(top: 12.5, bottom: 12.0),
               child: Text(
                 "Tom adventure",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
               ),
             ),
             Image.asset('images/picture.jpg',
-                width: 200, height: 300, fit: BoxFit.fitWidth)
+                width: 200, height: 300, fit: BoxFit.cover)
           ],
         ),
       );
@@ -55,9 +56,13 @@ class myApp extends StatelessWidget {
         children: <Widget>[
           _starColumn("Tim"),
           _starColumn("Alan"),
-          _starColumn("Riz"),
+          _starColumn("Liz"),
           _starColumn("John"),
-          _starColumn("Jake")
+          _starColumn("Jake"),
+          _starColumn("Tim"),
+          _starColumn("Alan"),
+          _starColumn("Liz"),
+          _starColumn("John"),
         ],
       ),
     );
