@@ -5,15 +5,30 @@ void main() => runApp(myApp());
 class myApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Widget pictureSection() {
+      return Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+              child: Text(
+                "Tom adventure",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              ),
+            ),
+            Image.asset('images/picture.jpg',
+                width: 200, height: 300, fit: BoxFit.fitWidth)
+          ],
+        ),
+      );
+    }
+
     Widget upperSection = Container(
       child: Row(
         children: <Widget>[
-      Expanded(
-        flex: 5,
-       child:   Image.asset('images/picture.jpg',
-              width: 200, height: 300, fit: BoxFit.fitWidth)),
+          Expanded(flex: 5, child: pictureSection()),
           Expanded(flex: 5, child: _starColumns())
-
         ],
       ),
     );
@@ -36,7 +51,7 @@ class myApp extends StatelessWidget {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _starColumn("Tim"),
           _starColumn("Alan"),
@@ -54,11 +69,8 @@ class myApp extends StatelessWidget {
         Center(
           child: Text(
             name,
-            style: TextStyle(
-                fontSize: 30.0
-            ),
+            style: TextStyle(fontSize: 30.0),
           ),
-
         )
       ],
     );
