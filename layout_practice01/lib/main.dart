@@ -68,6 +68,14 @@ class myApp extends StatelessWidget {
     );
   }
 
+  Widget _staffColumn(String label, String name){
+    return Column(
+      children: <Widget>[
+
+      ],
+    );
+  }
+
   Widget _starColumn(String name) {
     return Column(
       children: <Widget>[
