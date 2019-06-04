@@ -2,23 +2,20 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(myApp());
 
-class myApp extends StatelessWidget{
+class myApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
-      title: "Card List",
-      home: CardList()
-    );
+    return MaterialApp(title: "Card List", home: CardList());
   }
 }
 
-class CardList extends StatefulWidget{
+class CardList extends StatefulWidget {
   @override
   _CardListState createState() => _CardListState();
 }
 
-class _CardListState extends State<CardList>{
+class _CardListState extends State<CardList> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -27,10 +24,11 @@ class _CardListState extends State<CardList>{
         title: Text("Card list"),
       ),
       body: ListView(
-        children: List.generate(10, (index){
+        children: List.generate(10, (index) {
           return InkWell(
-            onTap: (){
-              
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NextScreen()));
             },
             child: Card(
               child: Column(
@@ -51,5 +49,18 @@ class _CardListState extends State<CardList>{
         }),
       ),
     );
+  }
+}
+
+class NextScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Material App"),
+        ),
+        body: Center(
+          child: Text("画面遷移できました"),
+        ));
   }
 }
