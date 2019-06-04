@@ -28,8 +28,20 @@ class _CardListState extends State<CardList>{
       ),
       body: ListView(
         children: List.generate(10, (index){
-          return Center(
-            child: Text("Card $index"),
+          return Card(
+            child: Column(
+              children: <Widget>[
+                Image.network("https://picsum.photos/240/150"),
+                Container(
+                  margin: EdgeInsets.all(10.0),
+                  child: ListTile(
+                    title: Text("Cart$index"),
+                    leading: Icon(Icons.person),
+                    subtitle: Text("SubTitle"),
+                  ),
+                )
+              ],
+            ),
           );
         }),
       ),
