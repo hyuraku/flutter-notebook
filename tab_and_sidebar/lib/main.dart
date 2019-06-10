@@ -47,6 +47,7 @@ class _TabAndSidebar extends State<TabAndSidebar>
         title: Text('No, $i'),
         onTap: (){
           _tapped = i;
+          tapItem();
         },
       );
       _items.add(item);
@@ -83,5 +84,12 @@ class _TabAndSidebar extends State<TabAndSidebar>
         style: const TextStyle(fontSize: 32.0, color: Colors.lightGreen),
       ),
     );
+  }
+
+  void tapItem(){
+    Navigator.pop(context);
+    setState(() {
+       _message = ' Tapped: [$_tapped]';
+    });
   }
 }
