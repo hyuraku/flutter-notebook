@@ -30,11 +30,27 @@ class _TabAndSidebar extends State<TabAndSidebar>
 
   TabController _tabController;
 
+  List _items = <Widget>[];
+  String _message;
+  int _tapped = 0;
+
   @override
   void initState() {
     super.initState();
 
     _tabController = TabController(length: tabs.length, vsync: this);
+
+    _message = ' OK';
+    for(var i = 0; i < 5; i++){
+      var item = ListTile(
+        leading: const Icon(Icons.phone_iphone),
+        title: Text('No, $i'),
+        onTap: (){
+          _tapped = i;
+        },
+      );
+      _items.add(item);
+    }
   }
 
   @override
@@ -50,13 +66,20 @@ class _TabAndSidebar extends State<TabAndSidebar>
           children: tabs.map((Tab tab) {
             return createTab(tab);
           }).toList()),
+      drawer: Drawer(
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(20.0),
+          children: _items,
+        ),
+      ),
     );
   }
 
   Widget createTab(Tab tab) {
     return Center(
       child: Text(
-        'This is '+ tab.text,
+        'This is '+ tab.text + _message,
         style: const TextStyle(fontSize: 32.0, color: Colors.lightGreen),
       ),
     );
