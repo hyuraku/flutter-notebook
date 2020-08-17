@@ -14,6 +14,7 @@ class TodoApp extends StatelessWidget {
 class TodoList extends StatefulWidget {
   // create TodoApp state
   @override
+  // stateを作成
   createState() => new TodoListState();
 }
 
