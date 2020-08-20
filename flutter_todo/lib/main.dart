@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(new TodoApp());
 
+const backGroundColor = Color.fromARGB(255, 214, 246, 255);
+
 class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    // TodoApp widget itself
-    return new MaterialApp(title: 'Todo list', home: new TodoList());
+    return new MaterialApp(
+      title: 'Todo list',
+      home: new TodoList(),
+    );
   }
 }
 
@@ -35,11 +38,7 @@ class TodoListState extends State<TodoList> {
         final item = _todoItems[index];
 
         return Dismissible(
-          // Each Dismissible must contain a Key. Keys allow Flutter to
-          // uniquely identify widgets.
           key: Key(item),
-          // Provide a function that tells the app
-          // what to do after an item has been swiped away.
           onDismissed: (direction) {
             // Remove the item from the data source.
             setState(() {
@@ -47,12 +46,25 @@ class TodoListState extends State<TodoList> {
             });
 
             // Then show a sPnackbar.
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text("$item dismissed")));
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text("$item dismissed"),
+              backgroundColor: Colors.black45,
+            ));
           },
           // Show a red background as the item is swiped away.
-          background: Container(color: Colors.red),
-          child: ListTile(title: Text('$item')),
+          background: Container(color: backGroundColor),
+
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: backGroundColor),
+              ),
+              color: Colors.white,
+            ),
+            child: ListTile(
+              title: Text('$item'),
+            ),
+          ),
         );
       },
     );
@@ -60,11 +72,11 @@ class TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Todo List'),
       ),
+      backgroundColor: backGroundColor,
       body: _buildTodoList(),
       floatingActionButton: new FloatingActionButton(
         onPressed: _pushAddTodoScreen,
